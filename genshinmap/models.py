@@ -70,7 +70,6 @@ class Maps(BaseModel):
     origin: list[int]
     total_size: list[int]
     padding: list[int]
-    id: str
 
     @validator("slices", pre=True)
     def slices_to_list(cls, v):
