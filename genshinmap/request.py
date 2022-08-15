@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Any
+from typing import Any, Dict, List, Tuple
 
 from httpx import Response, AsyncClient
 
@@ -10,10 +10,10 @@ from genshinmap.models import Spot, Tree, MapID, Point, MapInfo, SpotKinds
 CLIENT = AsyncClient(
     base_url="https://api-static.mihoyo.com/common/blackboard/ys_obc/v1/map"
 )
-Spots = dict[int, list[Spot]]
+Spots = Dict[int, List[Spot]]
 
 
-async def _request(endpoint: str) -> dict[str, Any]:
+async def _request(endpoint: str) -> Dict[str, Any]:
     resp = await CLIENT.get(endpoint)
     resp.raise_for_status()
     data: dict[str, Any] = resp.json()
@@ -22,7 +22,7 @@ async def _request(endpoint: str) -> dict[str, Any]:
     return data["data"]
 
 
-async def get_labels(map_id: MapID) -> list[Tree]:
+async def get_labels(map_id: MapID) -> List[Tree]:
     """
     获取米游社资源列表
 
@@ -37,7 +37,7 @@ async def get_labels(map_id: MapID) -> list[Tree]:
     return [Tree.parse_obj(i) for i in data["tree"]]
 
 
-async def get_points(map_id: MapID) -> list[Point]:
+async def get_points(map_id: MapID) -> List[Point]:
     """
     获取米游社坐标列表
 
@@ -69,7 +69,7 @@ async def get_maps(map_id: MapID) -> MapInfo:
 
 async def get_spot_from_game(
     map_id: MapID, cookie: str
-) -> tuple[Spots, SpotKinds]:
+) -> Tuple[Spots, SpotKinds]:
     """
     获取游戏内标点
 
@@ -86,7 +86,7 @@ async def get_spot_from_game(
         `tuple[Spots, SpotKinds]`
     """
 
-    def _raise_for_retcode(resp: Response) -> dict[str, Any]:
+    def _raise_for_retcode(resp: Response) -> Dict[str, Any]:
         resp.raise_for_status()
         data: dict[str, Any] = resp.json()
         if data["retcode"] != 0:

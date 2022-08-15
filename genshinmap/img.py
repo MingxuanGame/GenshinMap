@@ -1,19 +1,21 @@
 from __future__ import annotations
 
+from typing import List, Tuple
+
 import numpy as np
 from sklearn.cluster import KMeans
 from shapely.geometry import Point, Polygon
 
 from genshinmap.models import XYPoint
 
-Pos = tuple[float, float]
-Poses = list[XYPoint]
-Points = list[Point]
+Pos = Tuple[float, float]
+Poses = List[XYPoint]
+Points = List[Point]
 
 
 def k_means_points(
-    points: list[XYPoint], length: int = 500, clusters: int = 3
-) -> list[tuple[XYPoint, XYPoint, Poses]]:
+    points: List[XYPoint], length: int = 500, clusters: int = 3
+) -> List[Tuple[XYPoint, XYPoint, Poses]]:
     """
     通过 K-Means 获取集群坐标列表
 
@@ -51,7 +53,7 @@ def k_means_points(
     """
     pos_array = np.array(points)
     k_means = KMeans(n_clusters=clusters).fit(pos_array)
-    points_temp: list[Points] = []
+    points_temp: List[Points] = []
     for k_means_pos in k_means.cluster_centers_:
         x = (
             k_means_pos[0] - length if k_means_pos[0] > length else 0,
