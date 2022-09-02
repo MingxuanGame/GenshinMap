@@ -35,6 +35,13 @@ async def main():
         transmittable, maps.detail.origin
     )
 
+    # 获取地图锚点之一
+    anchors = await request.get_anchors(map_id)[0]
+    # 转换地图锚点偏左坐标
+    anchors_converted = utils.convert_pos(
+        anchors.get_children_all_left_point(), maps.detail.origin
+    )
+
 
 if __name__ == "__main__":
     asyncio.run(main())
