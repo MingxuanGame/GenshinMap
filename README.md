@@ -7,7 +7,7 @@
 [![Imports: isort](https://img.shields.io/badge/%20imports-isort-%231674b1?&labelColor=ef8336)](https://pycqa.github.io/isort/)
 [![pre-commit.ci status](https://results.pre-commit.ci/badge/github/MingxuanGame/GenshinMap/master.svg)](https://results.pre-commit.ci/latest/github/MingxuanGame/GenshinMap/master)
 
-GenshinMap 是一个米游社大地图 API 的包装，用于简易获取大地图数据
+GenshinMap 是一个原神米游社大地图 API 的包装，用于简易获取大地图数据
 
 ## 快速开始
 
@@ -46,6 +46,18 @@ async def main():
 if __name__ == "__main__":
     asyncio.run(main())
 ```
+
+## 致谢
+
+[观测大地图](https://webstatic.mihoyo.com/app/ys-map-cn/index.html) —— 本项目所包装的地图
+
+[H-K-Y/Genshin_Impact_bot](https://github.com/H-K-Y/Genshin_Impact_bot) —— 大地图数据的处理，本项目的蓝本
+
+## 计划
+
+* [ ] 补全模型相关文档
+* [ ] yuanshen.site 支持
+* *More...*
 
 ## 许可
 
