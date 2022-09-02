@@ -7,7 +7,7 @@ from asyncio import gather, create_task
 from PIL import Image
 from httpx import AsyncClient
 
-from genshinmap.models import Maps, Point, XYPoint
+from .models import Maps, Point, XYPoint
 
 CLIENT = AsyncClient()
 
@@ -40,16 +40,22 @@ async def make_map(map: Maps) -> Image.Image:
     """
     img = Image.new("RGBA", tuple(map.total_size))
     x = 0
+    y = 0
     maps: List[Image.Image] = await gather(
         *[create_task(get_img(url)) for url in map.slices]
     )
     for m in maps:
-        img.paste(m, (x, 0))
+        img.paste(m, (x, y))
         x += 4096
+        if x >= map.total_size[0]:
+            x = 0
+            y += 4096
     return img
 
 
-async def get_map_by_pos(map: Maps, x: Union[int, float]) -> Image.Image:
+async def get_map_by_pos(
+    map: Maps, x: Union[int, float], y: Union[int, float] = 0
+) -> Image.Image:
     """
     根据横坐标获取地图单片
 
@@ -60,10 +66,15 @@ async def get_map_by_pos(map: Maps, x: Union[int, float]) -> Image.Image:
         x: `int | float`
             横坐标
 
+        y: `int | float` (default: 0)
+            纵坐标
+
     返回：
         `PIL.Image.Image` 对象
     """
-    return await get_img(map.slices[int(x // 4096)])
+    # 4 * (y // 4096) {0,4,8}
+    # x // 4096 {0,1,2,3}
+    return await get_img(map.slices[4 * (int(y // 4096)) + int(x // 4096)])
 
 
 def get_points_by_id(id_: int, points: List[Point]) -> List[XYPoint]:

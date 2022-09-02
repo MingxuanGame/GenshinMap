@@ -73,7 +73,10 @@ class Maps(BaseModel):
 
     @validator("slices", pre=True)
     def slices_to_list(cls, v):
-        return [i["url"] for i in v[0]]
+        urls: List[str] = []
+        for i in v:
+            urls.extend(j["url"] for j in i)
+        return urls
 
 
 class MapInfo(BaseModel):

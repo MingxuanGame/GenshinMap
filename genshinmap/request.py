@@ -4,8 +4,8 @@ from typing import Any, Dict, List, Tuple
 
 from httpx import Response, AsyncClient
 
-from genshinmap.exc import StatusError
-from genshinmap.models import Spot, Tree, MapID, Point, MapInfo, SpotKinds
+from .exc import StatusError
+from .models import Spot, Tree, MapID, Point, MapInfo, SpotKinds
 
 CLIENT = AsyncClient(
     base_url="https://api-static.mihoyo.com/common/blackboard/ys_obc/v1/map"

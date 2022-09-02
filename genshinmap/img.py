@@ -6,7 +6,7 @@ import numpy as np
 from sklearn.cluster import KMeans
 from shapely.geometry import Point, Polygon
 
-from genshinmap.models import XYPoint
+from .models import XYPoint
 
 Pos = Tuple[float, float]
 Poses = List[XYPoint]
