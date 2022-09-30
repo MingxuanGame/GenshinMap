@@ -6,6 +6,7 @@
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 [![Imports: isort](https://img.shields.io/badge/%20imports-isort-%231674b1?&labelColor=ef8336)](https://pycqa.github.io/isort/)
 [![pre-commit.ci status](https://results.pre-commit.ci/badge/github/MingxuanGame/GenshinMap/master.svg)](https://results.pre-commit.ci/latest/github/MingxuanGame/GenshinMap/master)
+[![Codecov](https://codecov.io/gh/MingxuanGame/GenshinMap/branch/master/graph/badge.svg?token=SVSXXE6MBQ)](https://app.codecov.io/gh/MingxuanGame/GenshinMap)
 
 GenshinMap 是一个原神米游社大地图 API 的包装，用于简易获取大地图数据
 
