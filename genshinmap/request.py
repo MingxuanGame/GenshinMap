@@ -30,7 +30,7 @@ async def _request(
 ) -> Dict[str, Any]:
     resp = await client.get(endpoint)
     resp.raise_for_status()
-    data: dict[str, Any] = resp.json()
+    data: Dict[str, Any] = resp.json()
     if data["retcode"] != 0:
         raise StatusError(data["retcode"], data["message"])
     return data["data"]
