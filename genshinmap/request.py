@@ -16,9 +16,6 @@ from .models import (
     SpotKinds,
 )
 
-CLIENT = AsyncClient(
-    base_url="https://api-static.mihoyo.com/common/blackboard/ys_obc/v1/map"
-)
 API_CLIENT = AsyncClient(
     base_url="https://api-takumi.mihoyo.com/common/map_user/ys_obc/v1/map"
 )
@@ -26,7 +23,7 @@ Spots = Dict[int, List[Spot]]
 
 
 async def _request(
-    endpoint: str, client: AsyncClient = CLIENT
+    endpoint: str, client: AsyncClient = API_CLIENT
 ) -> Dict[str, Any]:
     resp = await client.get(endpoint)
     resp.raise_for_status()
@@ -158,7 +155,6 @@ async def get_page_label(map_id: MapID) -> List[PageLabel]:
     """
     data = await _request(
         f"/get_map_pageLabel?map_id={map_id}&app_sn=ys_obc&lang=zh-cn",
-        API_CLIENT,
     )
     return [PageLabel.parse_obj(i) for i in data["list"]]
 
@@ -176,6 +172,5 @@ async def get_anchors(map_id: MapID) -> List[Anchor]:
     """
     data = await _request(
         f"/map_anchor/list?map_id={map_id}&app_sn=ys_obc&lang=zh-cn",
-        API_CLIENT,
     )
     return [Anchor.parse_obj(i) for i in data["list"]]
