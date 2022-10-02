@@ -225,3 +225,21 @@ async def test_internal_request(monkeypatch: pytest.MonkeyPatch) -> None:
         exc = exc_info.value
         assert exc.status == 1
         assert exc.message == "err"
+
+
+@pytest.mark.asyncio
+@pytest.mark.parametrize(argnames="map_id", argvalues=[2, 7, 9])
+async def test_connection(map_id) -> None:
+    from genshinmap.request import (
+        get_maps,
+        get_labels,
+        get_points,
+        get_anchors,
+        get_page_label,
+    )
+
+    assert await get_labels(map_id)
+    assert await get_anchors(map_id)
+    assert await get_page_label(map_id)
+    assert await get_maps(map_id)
+    assert await get_points(map_id)
