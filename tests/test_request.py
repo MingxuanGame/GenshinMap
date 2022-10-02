@@ -67,7 +67,7 @@ async def test_page_label(monkeypatch: pytest.MonkeyPatch) -> None:
     with open(DIR / "page.json", encoding="utf-8") as f:
         data = json.load(f)
 
-    async def _fake_request(endpoint, client) -> Dict[str, Any]:
+    async def _fake_request(endpoint: str) -> Dict[str, Any]:
         return data
 
     monkeypatch.setattr("genshinmap.request._request", _fake_request)
@@ -85,7 +85,7 @@ async def test_anchor(monkeypatch: pytest.MonkeyPatch) -> None:
     with open(DIR / "anchors.json", encoding="utf-8") as f:
         data = json.load(f)
 
-    async def _fake_request(endpoint, client) -> Dict[str, Any]:
+    async def _fake_request(endpoint: str) -> Dict[str, Any]:
         return data
 
     monkeypatch.setattr("genshinmap.request._request", _fake_request)
