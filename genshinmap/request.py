@@ -17,7 +17,7 @@ from .models import (
 )
 
 API_CLIENT = AsyncClient(
-    base_url="https://api-takumi.mihoyo.com/common/map_user/ys_obc/v1/map"
+    base_url="https://waf-api-takumi.mihoyo.com/common/map_user/ys_obc/v1/map"
 )
 Spots = Dict[int, List[Spot]]
 
